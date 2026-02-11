@@ -1,0 +1,291 @@
+:root {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --accent: #4f46e5;
+  --completed: #9ca3af;
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 1.2rem;
+}
+
+.app-header {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+.subtitle {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+#rangeLabel {
+  margin: 0;
+  min-width: 210px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.ghost-btn,
+.primary-btn,
+.danger-btn,
+.switch-btn {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+.danger-btn {
+  background: #fff5f5;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+.ghost-btn:hover,
+.primary-btn:hover,
+.danger-btn:hover,
+.switch-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.view-switch {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+}
+
+.switch-btn {
+  border: 0;
+  border-radius: 0;
+}
+
+.switch-btn.active {
+  background: #ede9fe;
+  color: #3730a3;
+  font-weight: 600;
+}
+
+.calendar-panel {
+  margin-top: 1rem;
+  background: var(--panel);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: auto;
+}
+
+.calendar-grid {
+  display: grid;
+  min-width: 980px;
+  grid-auto-rows: minmax(58px, auto);
+}
+
+.grid-header,
+.day-label,
+.time-label,
+.slot-cell {
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+
+.grid-header,
+.day-label,
+.time-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  background: #fafafa;
+  position: sticky;
+  z-index: 2;
+}
+
+.grid-header {
+  top: 0;
+}
+
+.day-label {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  justify-content: flex-start;
+  padding-left: 0.65rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.slot-cell {
+  min-height: 58px;
+  position: relative;
+  padding: 0.25rem;
+  background: white;
+}
+
+.slot-cell:hover {
+  background: #f9fafb;
+}
+
+.slot-cell.drop-target {
+  outline: 2px solid #a5b4fc;
+  outline-offset: -2px;
+}
+
+.task {
+  width: 100%;
+  min-height: 48px;
+  border-radius: 10px;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: white;
+  display: grid;
+  gap: 0.25rem;
+  cursor: grab;
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+.task-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.task-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  opacity: 0.95;
+}
+
+.task-priority[data-priority="high"] {
+  font-weight: 700;
+}
+
+.task.completed {
+  opacity: 0.48;
+  filter: grayscale(0.5);
+}
+
+.task.completed .task-title {
+  text-decoration: line-through;
+}
+
+.task-check {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.7rem;
+}
+
+.task-check input {
+  margin: 0;
+}
+
+.task-dialog {
+  border: 0;
+  border-radius: 12px;
+  width: min(95vw, 460px);
+  padding: 0;
+  box-shadow: var(--shadow);
+}
+
+.task-dialog::backdrop {
+  background: rgba(17, 24, 39, 0.45);
+}
+
+#taskForm {
+  padding: 1rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+#taskForm label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+#taskForm input,
+#taskForm select {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.5rem;
+  font: inherit;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 840px) {
+  .app-shell {
+    padding: 0.7rem;
+  }
+
+  .calendar-panel {
+    border-radius: 10px;
+  }
+
+  .calendar-grid {
+    min-width: 860px;
+  }
+}
