@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekly Calendar To-Do</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <h1>Weekly Calendar To-Do</h1>
+          <p class="subtitle">Plan your week in a clear timetable layout.</p>
+        </div>
+
+        <div class="controls">
+          <button id="prevBtn" class="ghost-btn" aria-label="Previous week or day">◀</button>
+          <h2 id="rangeLabel" aria-live="polite"></h2>
+          <button id="nextBtn" class="ghost-btn" aria-label="Next week or day">▶</button>
+
+          <div class="view-switch" role="radiogroup" aria-label="View mode">
+            <button id="weeklyViewBtn" class="switch-btn active" data-view="weekly">Weekly</button>
+            <button id="dailyViewBtn" class="switch-btn" data-view="daily">Daily</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="calendar-panel">
+        <div id="calendarGrid" class="calendar-grid" aria-label="Calendar timetable"></div>
+      </section>
+    </main>
+
+    <!-- Modal used for creating/editing tasks -->
+    <dialog id="taskDialog" class="task-dialog">
+      <form id="taskForm" method="dialog">
+        <h3 id="dialogTitle">Add Task</h3>
+
+        <label>
+          Title
+          <input id="taskTitle" name="title" type="text" maxlength="80" required placeholder="Task title" />
+        </label>
+
+        <div class="form-row">
+          <label>
+            Day
+            <select id="taskDay" name="day" required></select>
+          </label>
+
+          <label>
+            Time
+            <input id="taskTime" name="time" type="number" min="0" max="23" required />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Color
+            <input id="taskColor" name="color" type="color" value="#4f46e5" />
+          </label>
+
+          <label>
+            Priority
+            <select id="taskPriority" name="priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+        </div>
+
+        <menu>
+          <button type="button" id="deleteTaskBtn" class="danger-btn">Delete</button>
+          <button type="button" id="cancelTaskBtn" class="ghost-btn">Cancel</button>
+          <button type="submit" class="primary-btn">Save Task</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
